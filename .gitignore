@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local datasets and model outputs
+data/**/raw/*
+data/**/processed/*
+data/yolo_mug_pen/images/**/*.jpg
+data/yolo_mug_pen/images/**/*.jpeg
+data/yolo_mug_pen/images/**/*.png
+data/yolo_mug_pen/labels/**/*.txt
+runs/
+*.pt
+*.onnx
+
+!.gitkeep
+!data/**/README.md
+!data/yolo_mug_pen/dataset.yaml
+
