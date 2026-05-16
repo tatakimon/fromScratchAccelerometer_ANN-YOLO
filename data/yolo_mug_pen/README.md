@@ -1,18 +1,47 @@
-# YOLO Mug/Pen Dataset
+# YOLO Pen/Sunglasses Dataset
 
-Place images and YOLO labels in this folder.
+This folder stores the YOLO dataset used by `yolo_mug_pen`.
 
-Classes:
+Active classes:
 
 ```text
-0 holding_mug
-1 holding_pen
+0 PEN
+1 SUNGLASSES
 ```
 
-Recommended first split for 100 images:
+## Source Export
 
-- 80 images in `images/train`
-- 20 images in `images/val`
+Roboflow export:
 
-Each image must have a matching `.txt` label file with the same filename stem.
+```text
+roboflow/train/images
+roboflow/train/labels
+```
 
+The Roboflow source folder is kept unchanged.
+
+## Prepared Dataset
+
+The local training layout is:
+
+```text
+images/
+|-- train/
+`-- val/
+labels/
+|-- train/
+`-- val/
+dataset.yaml
+```
+
+Create or refresh the prepared split with:
+
+```powershell
+python yolo_mug_pen\src\prepare_roboflow_split.py
+```
+
+Then verify matching image/label pairs with:
+
+```powershell
+python yolo_mug_pen\src\check_dataset.py
+```

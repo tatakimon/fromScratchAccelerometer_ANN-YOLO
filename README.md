@@ -3,7 +3,7 @@
 This workspace has two learning projects:
 
 1. `ann_from_scratch` - accelerometer anomaly detection with a NumPy neural network.
-2. `yolo_mug_pen` - YOLO detection for hands holding a coffee mug or a pen.
+2. `yolo_mug_pen` - YOLO detection for pens and sunglasses.
 
 Project 1 now has a complete learning pipeline from raw accelerometer logs to a trained ANN written from scratch. It is still a learning/MVP version, not a production anomaly detector.
 
@@ -50,11 +50,18 @@ Completed steps:
 3. Plot normal/anomaly accelerometer signals.
 4. Create 512-sample overlapping windows.
 5. Extract 20 statistical features per window.
-6. Split train/test data without overlap leakage.
+6. Split train/test data by time order to avoid overlap leakage.
 7. Build a one-hidden-layer ANN with NumPy.
 8. Add forward pass, binary cross entropy, backpropagation, and gradient descent.
 
 Current dataset is short, around 22-25 seconds per class. It is enough to learn the pipeline, but not enough to claim a reliable anomaly detector.
+
+Important split rule:
+
+```text
+Do not randomly split overlapping windows.
+Split by time order first, remove overlap at the train/test boundary, then shuffle only the training rows.
+```
 
 ## Project 1 Command Order
 
@@ -75,4 +82,4 @@ For Project 1, the best next improvement is collecting longer and more varied re
 - 3 minutes anomaly
 - ideally multiple separate recordings per class
 
-For Project 2, the next step is collecting and labeling mug/pen images.
+For Project 2, the current dataset is a Roboflow YOLOv8 export for PEN and SUNGLASSES.

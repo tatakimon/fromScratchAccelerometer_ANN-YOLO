@@ -3,6 +3,5 @@ train: images/train
 val: images/val
 
 names:
-  0: holding_mug
-  1: holding_pen
-
+  0: PEN
+  1: SUNGLASSES

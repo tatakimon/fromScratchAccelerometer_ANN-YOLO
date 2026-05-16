@@ -10,12 +10,15 @@ data/**/processed/*
 data/yolo_mug_pen/images/**/*.jpg
 data/yolo_mug_pen/images/**/*.jpeg
 data/yolo_mug_pen/images/**/*.png
+data/yolo_mug_pen/test_images/
 data/yolo_mug_pen/labels/**/*.txt
+data/yolo_mug_pen/labels/**/*.cache
+data/yolo_mug_pen/roboflow/
 runs/
+Ultralytics/
 *.pt
 *.onnx
 
 !.gitkeep
 !data/**/README.md
 !data/yolo_mug_pen/dataset.yaml
-

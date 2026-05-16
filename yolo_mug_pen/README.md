@@ -1,11 +1,38 @@
-# YOLO Mug/Pen Hand Detection
+# YOLO Pen/Sunglasses Detection
 
-Goal: train a YOLO model to detect two classes:
+Goal: train a YOLOv8 model to detect two classes:
 
-- `holding_mug`
-- `holding_pen`
+```text
+0 PEN
+1 SUNGLASSES
+```
 
-Start with around 100 images. More important than count: variety and correct labels.
+The folder name is still `yolo_mug_pen` because this project started as a mug/pen idea. The active dataset is now pen/sunglasses.
+
+## Dataset Source
+
+The current images and labels come from a Roboflow YOLOv8 export:
+
+```text
+data/yolo_mug_pen/roboflow/
+```
+
+Roboflow exported all files into `roboflow/train`, so we prepare our own local train/validation split.
+
+Run:
+
+```powershell
+python yolo_mug_pen\src\prepare_roboflow_split.py
+```
+
+This copies paired files into:
+
+```text
+data/yolo_mug_pen/images/train
+data/yolo_mug_pen/images/val
+data/yolo_mug_pen/labels/train
+data/yolo_mug_pen/labels/val
+```
 
 ## Dataset Layout
 
@@ -13,13 +40,13 @@ YOLO expects matching image and label files:
 
 ```text
 data/yolo_mug_pen/
-├── images/
-│   ├── train/
-│   └── val/
-├── labels/
-│   ├── train/
-│   └── val/
-└── dataset.yaml
+|-- images/
+|   |-- train/
+|   `-- val/
+|-- labels/
+|   |-- train/
+|   `-- val/
+`-- dataset.yaml
 ```
 
 For example:
@@ -37,18 +64,20 @@ class_id center_x center_y width height
 
 All coordinates are normalized from 0 to 1.
 
-## Label IDs
+## Check Dataset
 
-```text
-0 holding_mug
-1 holding_pen
+After preparing the split:
+
+```powershell
+python yolo_mug_pen\src\check_dataset.py
 ```
 
-## First Milestone
+Only train after image/label pairs are valid.
 
-1. Collect 100 images.
-2. Split roughly 80 train and 20 validation.
-3. Label with a tool such as Label Studio, CVAT, Roboflow, or makesense.ai.
-4. Run `python yolo_mug_pen/src/check_dataset.py`.
-5. Only then run training.
+## Train
 
+```powershell
+python yolo_mug_pen\src\train.py
+```
+
+The first run uses `yolov8n.pt`, a small YOLOv8 model suitable for learning.

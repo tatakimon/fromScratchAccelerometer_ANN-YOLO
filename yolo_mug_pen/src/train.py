@@ -1,4 +1,9 @@
-"""Train a YOLO model on the mug/pen hand dataset."""
+"""Train a YOLO model on the pen/sunglasses dataset."""
+
+import os
+from pathlib import Path
+
+os.environ.setdefault("YOLO_CONFIG_DIR", str(Path("runs/ultralytics_config").resolve()))
 
 from ultralytics import YOLO
 
@@ -17,4 +22,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

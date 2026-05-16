@@ -156,6 +156,24 @@ window 1: samples 256-767
 
 These windows overlap. Randomly splitting overlapping windows can put shared physical samples into both train and test. The split script avoids that by splitting by time order per class and removing boundary overlap.
 
+The exact rule is:
+
+```text
+1. Keep each class in time order.
+2. Put the earlier windows into train.
+3. Put the later windows into test.
+4. Remove the boundary training window if it overlaps the first test window.
+5. Shuffle only the training rows.
+6. Keep the test rows ordered for easier inspection.
+```
+
+Why shuffle only training rows:
+
+```text
+Training should see a mixed order of normal/anomaly examples.
+Testing does not learn, so test order does not affect accuracy or loss.
+```
+
 Outputs:
 
 ```text
